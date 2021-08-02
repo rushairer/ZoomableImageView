@@ -1,5 +1,7 @@
 # ZoomableImageView
 
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rushairer/ZoomableImageView) ![GitHub](https://img.shields.io/github/license/rushairer/ZoomableImageView) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/rushairer/ZoomableImageView?include_prereleases) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rushairer/ZoomableImageView.svg)
+
 Simple SwiftUI ImageView that enables dragging and zooming.
 
 ## Declaration
