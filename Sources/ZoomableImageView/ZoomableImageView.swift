@@ -87,7 +87,7 @@ struct ZoomableImageView_Previews: PreviewProvider {
         @State var image: UIImage = UIImage()
         
         var body: some View {
-            if #available(iOSApplicationExtension 15.0, *) {
+            if #available(iOS 15.0, *) {
                 ZoomableImageView(image: image, maximumZoomScale: 10)
                     .task {
                         do {
