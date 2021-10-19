@@ -1,3 +1,5 @@
+#if os(iOS) || os(tvOS)
+
 import UIKit
 
 class ZoomableImageUIView: UIView, UIScrollViewDelegate {
@@ -12,9 +14,13 @@ class ZoomableImageUIView: UIView, UIScrollViewDelegate {
         scrollView.bouncesZoom = true
         scrollView.maximumZoomScale = self.maximumZoomScale
         scrollView.minimumZoomScale = ZoomableImageUIView.kMinimumZoomScale
+        #if !os(tvOS)
         scrollView.isMultipleTouchEnabled = true
+        #endif
         scrollView.delegate = self
+        #if !os(tvOS)
         scrollView.scrollsToTop = false
+        #endif
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -202,3 +208,5 @@ class ZoomableImageUIView: UIView, UIScrollViewDelegate {
         refreshImageContainerViewCenter()
     }
 }
+
+#endif

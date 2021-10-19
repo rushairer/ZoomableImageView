@@ -4,7 +4,7 @@
 //
 //  Created by Abenx on 2021/8/2.
 //
-
+#if os(iOS) || os(tvOS)
 import SwiftUI
 
 /// Simple SwiftUI ImageView that enables dragging and zooming.
@@ -76,7 +76,9 @@ extension ZoomableImageView {
     }
 }
 
-
+@available(iOS 15.0, *)
+@available(tvOS 15.0, *)
+@available(macCatalyst 15.0, *)
 struct ZoomableImageView_Previews: PreviewProvider {
     
     static var previews: some View {
@@ -87,21 +89,23 @@ struct ZoomableImageView_Previews: PreviewProvider {
         @State var image: UIImage = UIImage()
         
         var body: some View {
-            if #available(iOS 15.0, *) {
-                ZoomableImageView(image: image, maximumZoomScale: 10)
-                    .task {
-                        do {
-                            let url = URL(string: "https://apod.nasa.gov/apod/image/2108/PlutoEnhancedHiRes_NewHorizons_960.jpg")!
-                            let (imageLocalURL, _) = try await URLSession.shared.download(from: url)
-                            let imageData = try Data(contentsOf: imageLocalURL)
-                            image = UIImage(data: imageData)!
-                        } catch {
-                            print(error)
-                        }
+#if (os(iOS) && !targetEnvironment(macCatalyst)) || os(tvOS)
+            ZoomableImageView(image: image, maximumZoomScale: 10)
+                .task {
+                    do {
+                        let url = URL(string: "https://apod.nasa.gov/apod/image/2108/PlutoEnhancedHiRes_NewHorizons_960.jpg")!
+                        let (imageLocalURL, _) = try await URLSession.shared.download(from: url)
+                        let imageData = try Data(contentsOf: imageLocalURL)
+                        image = UIImage(data: imageData)!
+                    } catch {
+                        print(error)
                     }
-            } else {
-                ZoomableImageView(image: UIImage(systemName: "photo")!)
-            }
+                }
+#else
+            ZoomableImageView(image: UIImage(systemName: "photo")!)
+#endif
         }
     }
 }
+
+#endif

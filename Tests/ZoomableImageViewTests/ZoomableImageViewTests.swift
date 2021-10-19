@@ -1,6 +1,7 @@
 import XCTest
 @testable import ZoomableImageView
 
+#if os(iOS) && !targetEnvironment(macCatalyst)
 final class ZoomableImageViewTests: XCTestCase {
     @available(iOS 15.0, *)
     func testRequestImageFromURL() async throws {
@@ -15,3 +16,4 @@ final class ZoomableImageViewTests: XCTestCase {
         XCTAssertNotNil(image)
     }
 }
+#endif

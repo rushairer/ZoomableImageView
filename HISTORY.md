@@ -1,3 +1,9 @@
+# 1.0.2
+
+`2021-10-20`
+### Added
+    - Add support for tvOS, macCatalyst
+
 # 1.0.1
 
 `2021-08-13`
